@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Button,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,7 +18,10 @@ export default function App() {
   }
   function addGoalHandler() {
     console.log("on click: " + inputText);
-    setCouserGoals((currentCourseGoal) => [...currentCourseGoal, inputText]);
+    setCouserGoals((currentCourseGoal) => [
+      ...currentCourseGoal,
+      { text: inputText, key: Math.random().toString },
+    ]);
     // setCouserGoals([...courseGoals, inputText]); //one way of doing but not good for state
   }
   return (
@@ -31,14 +35,17 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <ScrollView>
-          <Text>List of Goals...</Text>
-          {courseGoals.map((goal) => (
-            <View style={styles.goalItem} key={goal}>
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <Text>List of Goals...</Text>
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );
