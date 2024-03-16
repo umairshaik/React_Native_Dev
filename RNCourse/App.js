@@ -20,7 +20,7 @@ export default function App() {
     console.log("on click: " + inputText);
     setCouserGoals((currentCourseGoal) => [
       ...currentCourseGoal,
-      { text: inputText, key: Math.random().toString },
+      { text: inputText, id: Math.random().toString },
     ]);
     // setCouserGoals([...courseGoals, inputText]); //one way of doing but not good for state
   }
@@ -37,6 +37,9 @@ export default function App() {
       <View style={styles.goalsContainer}>
         <Text>List of Goals...</Text>
         <FlatList
+          keyExtractor={(item, index) => {
+            return item.id + index;
+          }}
           data={courseGoals}
           renderItem={(itemData) => {
             return (
