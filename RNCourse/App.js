@@ -22,6 +22,16 @@ export default function App() {
     ]);
     // setCouserGoals([...courseGoals, inputText]); //one way of doing but not good for state
   }
+
+  function deleteGoalHandler(id) {
+    console.log("Delete");
+    setCouserGoals((currentCourseGoal) => {
+      return currentCourseGoal.filter((courseGoal) => {
+        return courseGoal.id !== id;
+      });
+    });
+  }
+
   return (
     <View style={styles.appContatiner}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -33,7 +43,13 @@ export default function App() {
           }}
           data={courseGoals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} />;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                id={itemData.item.id}
+                onDeleteItem={deleteGoalHandler}
+              />
+            );
           }}
         />
       </View>
