@@ -19,13 +19,17 @@ export default function App() {
     setModalIsVisible(true);
   }
 
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
+  }
+
   function addGoalHandler(inputText) {
     console.log("on click: " + inputText);
     setCouserGoals((currentCourseGoal) => [
       ...currentCourseGoal,
       { text: inputText, id: Math.random().toString },
     ]);
-    // setCouserGoals([...courseGoals, inputText]); //one way of doing but not good for state
+    endAddGoalHandler();
   }
 
   function deleteGoalHandler(id) {
@@ -44,7 +48,11 @@ export default function App() {
         color="#5e0acc"
         onPress={startAddGoalHandler}
       />
-      <GoalInput onAddGoal={addGoalHandler} visible={modalIsVisible} />
+      <GoalInput
+        onAddGoal={addGoalHandler}
+        visible={modalIsVisible}
+        onCancel={endAddGoalHandler}
+      />
       <View style={styles.goalsContainer}>
         <Text style={styles.goalsHeadder}>List of Goals...</Text>
         <FlatList
