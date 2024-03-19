@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { ImageBackground, StyleSheet, View } from "react-native";
+import { ImageBackground, SafeAreaView, StyleSheet, View } from "react-native";
 import GameScreen from "./screens/GameScreen";
 import StartGameScreen from "./screens/StartGameScreen";
 import { LinearGradient } from "expo-linear-gradient";
+import MyColors from "./util/Colors";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
@@ -19,7 +20,7 @@ export default function App() {
 
   return (
     <LinearGradient
-      colors={["#ddb52f", "#4e0329"]}
+      colors={[MyColors.accent500, MyColors.primary800]}
       style={styles.rootContainer}
     >
       <ImageBackground
@@ -28,7 +29,7 @@ export default function App() {
         imageStyle={{ opacity: 0.35 }}
         source={require("./assets/BackgroundImage/background.png")}
       >
-        {screen}
+        <SafeAreaView style={styles.rootContainer}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
@@ -37,7 +38,6 @@ export default function App() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    backgroundColor: "#ddb52f",
   },
   backgroundContainer: {
     flex: 1,
