@@ -28,11 +28,6 @@ export default function App() {
     return null;
   }
 
-  function guessRoundsHandler(value) {
-    setGuessRounds(value);
-    setGuessRounds(0);
-  }
-
   function startNewGameHandler() {
     setUserNumber(null);
     setGameIsOver(false);
@@ -43,8 +38,9 @@ export default function App() {
     setGameIsOver(false);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(numberOfRounds) {
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
   }
 
   let screen = <StartGameScreen onPickedNumber={pickedNumberHandler} />;
@@ -74,7 +70,7 @@ export default function App() {
         style={styles.backgroundContainer}
         resizeMode="cover"
         imageStyle={{ opacity: 0.35 }}
-        source={require("./assets/BackgroundImage/background.png")}
+        source={require("./assets/Images/background.png")}
       >
         <SafeAreaView style={styles.rootContainer}>{screen}</SafeAreaView>
       </ImageBackground>

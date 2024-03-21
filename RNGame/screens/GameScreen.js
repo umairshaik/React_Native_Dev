@@ -1,12 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import NumberContainer from "../components/game/NumberContainer";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
 import MyColors from "../util/Colors";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 const LOWER = "Lower";
 const GREATER = "Greater";
@@ -30,11 +31,12 @@ function GameScreen({ userNumber, onGameOver }) {
     userNumber
   );
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess == userNumber) {
       console.log("guess is correct");
-      onGameOver();
+      onGameOver(guessRounds.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
 
@@ -69,9 +71,16 @@ function GameScreen({ userNumber, onGameOver }) {
     } else {
       minBoundary = currentGuess;
     }
-    setCurrentGuess(
-      generateRandomBetween(minBoundary, maxBoundary, currentGuess)
+    const newRndNumber = generateRandomBetween(
+      minBoundary,
+      maxBoundary,
+      currentGuess
     );
+    setCurrentGuess(newRndNumber);
+    setGuessRounds((previousGuessRound) => [
+      newRndNumber,
+      ...previousGuessRound,
+    ]);
   }
 
   return (
@@ -95,6 +104,21 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
+      <View style={styles.listContainer}>
+        {/* {guessRounds.map((value) => (
+          <Text key={value}>{value}</Text>
+        ))} */}
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              roundNumber={guessRounds.length - itemData.index}
+              guess={itemData.item}
+            />
+          )}
+          keyExtractor={(itemData) => itemData}
+        />
+      </View>
     </View>
   );
 }
@@ -113,5 +137,9 @@ const styles = StyleSheet.create({
   },
   instructionText: {
     marginBottom: 16,
+  },
+  listContainer: {
+    flex: 1,
+    padding: 16,
   },
 });
