@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -24,9 +24,9 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Welcome from './src/components/Welcome';
-import Pet from './src/components/Pets';
-import PetQualities from './src/components/PetQualities';
+import Welcome from './components/Welcome';
+import Pet from './components/Pets';
+import PetQualities from './components/PetQualities';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -95,6 +95,8 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const [] = useState<number>(12);
 
   return <Message />;
 }
