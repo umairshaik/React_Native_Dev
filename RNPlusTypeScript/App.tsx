@@ -8,6 +8,7 @@
 import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -27,6 +28,7 @@ import {
 import Welcome from './components/Welcome';
 import Pet from './components/Pets';
 import PetQualities from './components/PetQualities';
+import TimerCountdownDisplay from './components/TimerCountdownDisplay';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -89,6 +91,38 @@ const qualities = [
   },
 ];
 
+const FOCUS_TIME_MINUTES = 0.2 * 60 * 1000;
+const BREAK_TIME_MINUTES = 0.1 * 60 * 1000;
+
+const Counter = () => {
+  const [timerCount, setTimerCount] = useState<number>(FOCUS_TIME_MINUTES);
+  const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(
+    null,
+  );
+
+  const startTimer = () => {
+    const id = setInterval(() => setTimerCount(prev => prev - 1000), 1000);
+    setTimerInterval(id);
+  };
+
+  const stopTimer = () => {
+    if (timerInterval != null) {
+      clearInterval(timerInterval);
+    }
+    setTimerInterval(null);
+  };
+
+  const timerDate = new Date(timerCount);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <TimerCountdownDisplay timerDate={timerDate} />
+      <Button title="start timer" onPress={startTimer} />
+      <Button title="stop timer" onPress={stopTimer} />
+    </SafeAreaView>
+  );
+};
+
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -96,9 +130,8 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const [] = useState<number>(12);
-
-  return <Message />;
+  // return <Message />;
+  return <Counter />;
 }
 
 const styles = StyleSheet.create({
