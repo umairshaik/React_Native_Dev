@@ -1,15 +1,16 @@
+import React from 'react';
 import {Text, View} from 'react-native';
 
 type Prop = {
   timerDate: Date;
 };
 
-const TimerCountdownDisplay = (prop: Prop) => {
+const TimerCountdownDisplay: React.FC<Prop> = ({timerDate}) => {
   return (
     <View>
       <Text>
-        {prop.timerDate.getMinutes().toString().padStart(2, '0')}:
-        {prop.timerDate.getSeconds().toString().padStart(2, '0')}
+        {timerDate.getMinutes().toString().padStart(2, '0')}:
+        {timerDate.getSeconds().toString().padStart(2, '0')}
       </Text>
     </View>
   );
