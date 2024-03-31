@@ -5,30 +5,23 @@
  * @format
  */
 
-import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Welcome from './components/Welcome';
-import Pet from './components/Pets';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import PetQualities from './components/PetQualities';
+import Pet from './components/Pets';
 import TimerCountdownDisplay from './components/TimerCountdownDisplay';
+import Welcome from './components/Welcome';
+import TimerToggleButton from './components/TimerToggleButton';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -99,15 +92,18 @@ const Counter = () => {
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(
     null,
   );
+  const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
 
   const startTimer = () => {
     const id = setInterval(() => setTimerCount(prev => prev - 1000), 1000);
+    setIsTimerRunning(true);
     setTimerInterval(id);
   };
 
   const stopTimer = () => {
     if (timerInterval != null) {
       clearInterval(timerInterval);
+      setIsTimerRunning(false);
     }
     setTimerInterval(null);
   };
@@ -117,8 +113,12 @@ const Counter = () => {
   return (
     <SafeAreaView style={styles.container}>
       <TimerCountdownDisplay timerDate={timerDate} />
-      <Button title="start timer" onPress={startTimer} />
-      <Button title="stop timer" onPress={stopTimer} />
+      <TimerToggleButton
+        isTimerRunning={isTimerRunning}
+        startTimer={startTimer}
+        stopTimer={stopTimer}
+      />
+      {/* <Button title="stop timer" onPress={stopTimer} /> */}
     </SafeAreaView>
   );
 };
