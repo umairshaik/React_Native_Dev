@@ -6,7 +6,7 @@
  */
 
 import type {PropsWithChildren} from 'react';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -84,7 +84,7 @@ const qualities = [
   },
 ];
 
-const FOCUS_TIME_MINUTES = 0.2 * 60 * 1000;
+const FOCUS_TIME_MINUTES = 1000;
 const BREAK_TIME_MINUTES = 0.1 * 60 * 1000;
 
 const Counter = () => {
@@ -93,6 +93,13 @@ const Counter = () => {
     null,
   );
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (timerCount == 0) {
+      console.log('Stop');
+      stopTimer();
+    }
+  }, [timerCount]);
 
   const startTimer = () => {
     const id = setInterval(() => setTimerCount(prev => prev - 1000), 1000);
@@ -112,6 +119,7 @@ const Counter = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text>Time to Focus!🧐</Text>
       <TimerCountdownDisplay timerDate={timerDate} />
       <TimerToggleButton
         isTimerRunning={isTimerRunning}
@@ -153,6 +161,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: '#c95550',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 30,
