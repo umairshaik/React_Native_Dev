@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[component]-[Divider] should render the Divider component 1`] = `
+<View
+  accessibilityHint="mock-divider"
+  accessibilityLabel="click to mock-divider"
+  style={
+    [
+      {
+        "borderBottomColor": "#000",
+        "borderBottomWidth": 0.5,
+        "height": 0,
+      },
+    ]
+  }
+/>
+`;

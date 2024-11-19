@@ -1,0 +1,64 @@
+name: E2E_Android
+
+on:
+  workflow_dispatch:
+
+env:
+  APP_UPLOAD_KEY_PASSWORD: ${{ secrets.APP_UPLOAD_KEY_PASSWORD }}
+  APP_UPLOAD_STORE_PASSWORD: ${{ secrets.APP_UPLOAD_STORE_PASSWORD }}
+  APP_UPLOAD_KEY_ALIAS: ${{ secrets.APP_UPLOAD_KEY_ALIAS }}
+  APP_UPLOAD_SIGNING_KEYSTORE: ${{ secrets.APP_UPLOAD_SIGNING_KEYSTORE_FILENAME }}
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Setup node and caching
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Setup App signing keystore
+        run: |
+          # Copy keystore file
+          echo ${{ secrets.APP_UPLOAD_SIGNING_KEYSTORE_B64 }} > upload_signing_keystore.keystore.b64
+          base64 -d -i upload_signing_keystore.keystore.b64 > apps/mobile/android/app/${{ secrets.APP_UPLOAD_SIGNING_KEYSTORE_FILENAME }}
+
+      - name: Use specific Java version for android gradle to work
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          architecture: 'x64'
+
+      - name: Run detox build
+        run: |
+          yarn detox_build:android:release
+
+      - name: Detox test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 31
+          arch: x86_64
+          avd-name: 'Pixel_6_API_31'
+          script: yarn detox:android:release --headless --record-logs all --record-videos all
+          #detox build:android is not starting up the metro, so running the app will explicitely start metro and then run the detox test
+
+      - name: Store Detox artifacts on test failure
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: detox-artifacts
+          path: ./apps/mobile/e2e/artifacts # Default path for Detox artifacts

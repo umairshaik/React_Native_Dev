@@ -1,0 +1,13 @@
+.*\.talismanrc
+.*\.lock
+.*\.lock
+.*\.md
+.*\.xcscheme
+.*\.pbxproj
+.yarn/
+apps/mobile/ios/loading.json
+apps/mobile/ios/lightSplash.json
+apps/mobile/ios/darkSplash.json
+apps/mobile/android/app/src/main/res/raw/loading.json
+apps/mobile/android/app/src/main/res/raw-night/loading.json
+packages/mock-server/src/services/user-service.js

@@ -1,0 +1,61 @@
+name: E2E_iOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Setup node and caching
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Install all dependencies
+        run: yarn install --immutable
+
+      - name: Cache Pods
+        uses: actions/cache@v3
+        with:
+          path: |
+            apps/mobile/ios/Pods
+            ~/Library/Caches/CocoaPods
+            ~/.cocoapods
+          key: cache-${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+
+      - name: Select Xcode version
+        run: sudo xcode-select -s '/Applications/Xcode_13.4.app/Contents/Developer'
+
+      - name: Install Pod Dependencies
+        run: cd apps/mobile/ios && pod install && cd ../../..
+
+      - name: Install Apple simulators as Detox Dependencies
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: Build detox for ios
+        run: |
+          yarn detox_build:ios:release
+
+      - name: Run detox tests for ios
+        run: |
+          npx detox clean-framework-cache && npx detox build-framework-cache
+          yarn detox:ios:release
+
+      - name: Store Detox artifacts on test failure
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: detox-artifacts
+          path: ./apps/mobile/e2e/artifacts # Default path for Detox artifacts

@@ -1,0 +1,54 @@
+{
+  "name": "catalystUiReactNativeStarter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Regional-IT-India/catalyst-ui-reactnative-starter.git",
+  "author": "abhishek <abhishek.sharma@thoughtworks.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*",
+      "shared/*"
+    ]
+  },
+  "scripts": {
+    "postinstall": "yarn jetify && husky install && sh tools/talisman/talisman-precommit.sh",
+    "jetify": "jetify",
+    "lint": "yarn workspaces foreach run lint",
+    "lint:fix": "yarn workspaces foreach run lint:fix",
+    "lint:style": "yarn workspaces foreach run lint:style",
+    "lint:mobile": "yarn workspace mobile run lint",
+    "type-check": "yarn workspaces foreach run type-check",
+    "prettier:check": "yarn workspaces foreach run prettier:check",
+    "prettier:fix": "yarn workspaces foreach run prettier:fix",
+    "test": "jest  --detectOpenHandles"
+  },
+  "packageManager": "yarn@3.2.1",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.33.1",
+    "@typescript-eslint/parser": "5.33.1",
+    "commitizen": "4.2.4",
+    "cz-format-extension": "1.5.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-react-native": "4.0.0",
+    "husky": "8.0.1",
+    "jest": "29.1.1",
+    "jetifier": "2.0.0",
+    "stylelint-config-prettier": "9.0.3",
+    "stylelint-config-react-native-styled-components": "0.5.0",
+    "stylelint-config-recommended": "9.0.0",
+    "stylelint-config-standard": "28.0.0",
+    "stylelint-processor-styled-components": "1.10.0",
+    "stylelint-react-native": "2.4.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-format-extension"
+    }
+  },
+  "resolutions": {
+    "react-native@0.69.7": "patch:react-native@npm:0.69.7#.yarn/patches/react-native-npm-0.69.7-7b0cb946f7.patch"
+  }
+}

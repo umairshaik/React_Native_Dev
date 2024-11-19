@@ -1,0 +1,30 @@
+{
+  "name": "@catalyst/storage",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "test": "jest"
+  },
+  "files": [
+    "src",
+    "jest"
+  ],
+  "exports": {
+    ".": "./index.ts",
+    "./AsyncStorage": "./src/AsyncKeyValueStore.ts",
+    "./SecureStorage": "./src/SecureKeyValueStore.ts",
+    "./MockStorage": {
+      "default": "./jest/mock-storage.js",
+      "types": "./jest/mock-storage.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@shared/config": "workspace:*",
+    "jest": "29.1.1"
+  },
+  "peerDependencies": {
+    "@react-native-async-storage/async-storage": "*",
+    "react-native-keychain": "*"
+  }
+}

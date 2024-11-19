@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Language Selector Component snapshot match 1`] = `
+<View>
+  <RNCAndroidDialogPicker
+    dropdownIconColor={-14935265}
+    items={
+      [
+        {
+          "color": null,
+          "enabled": true,
+          "label": "English",
+          "style": {
+            "backgroundColor": null,
+            "color": null,
+          },
+        },
+        {
+          "color": null,
+          "enabled": true,
+          "label": "Hindi",
+          "style": {
+            "backgroundColor": null,
+            "color": null,
+          },
+        },
+      ]
+    }
+    onSelect={[Function]}
+    selected={0}
+    style={
+      [
+        {
+          "color": "#1C1B1F",
+        },
+        undefined,
+      ]
+    }
+    testID="language-selector"
+  />
+</View>
+`;

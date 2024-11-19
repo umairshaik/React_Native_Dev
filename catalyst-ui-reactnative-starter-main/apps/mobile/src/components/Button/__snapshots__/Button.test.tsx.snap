@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Component] - [Button] should render button component correctly 1`] = `
+<View
+  accessibilityHint="click to mock-button"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": "mock-button",
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "backgroundColor": "#6750A4",
+        "borderRadius": 5,
+        "paddingBottom": 12,
+        "paddingLeft": 15,
+        "paddingRight": 15,
+        "paddingTop": 12,
+      },
+    ]
+  }
+  testID="mock-button"
+  type="filled"
+>
+  <Text
+    style={
+      [
+        {
+          "alignSelf": "center",
+          "color": "#FFFFFF",
+          "fontSize": 16,
+          "fontWeight": "500",
+          "lineHeight": 24,
+        },
+        {},
+      ]
+    }
+    type="filled"
+  >
+    Press me
+  </Text>
+</View>
+`;

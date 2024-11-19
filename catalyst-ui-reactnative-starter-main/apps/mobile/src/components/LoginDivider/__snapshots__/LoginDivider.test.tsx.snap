@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[component]-[LoginDivider] should render the LoginDivider component 1`] = `
+<View
+  style={
+    [
+      {
+        "borderColor": "#d3d3d3",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "height": 21,
+        "justifyContent": "center",
+        "width": 39,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityHint="Box Divider"
+    accessibilityLabel="click to Box Divider"
+    style={
+      [
+        {
+          "borderBottomColor": "#000",
+          "borderBottomWidth": 0.5,
+          "height": 0,
+        },
+        {
+          "alignSelf": "center",
+          "borderWidth": 2,
+          "width": 7,
+        },
+      ]
+    }
+  />
+</View>
+`;

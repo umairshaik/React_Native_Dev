@@ -1,0 +1,24 @@
+{
+  "name": "@shared/config",
+  "main": "index.js",
+  "version": "1.0.0",
+  "packageManager": "yarn@3.2.1",
+  "exports": {
+    ".": "./index.ts",
+    "./babel": "./babel.js",
+    "./jest": "./jest.js"
+  },
+  "devDependencies": {
+    "@babel/core": "7.19.3",
+    "@babel/plugin-transform-react-jsx": "7.19.0",
+    "@babel/runtime": "7.19.0",
+    "jest-styled-components": "7.1.1",
+    "metro-react-native-babel-preset": "0.72.3",
+    "ts-jest": "29.0.3"
+  },
+  "peerDependencies": {
+    "@catalyst/storage": "*",
+    "jest": "*",
+    "typescript": "*"
+  }
+}

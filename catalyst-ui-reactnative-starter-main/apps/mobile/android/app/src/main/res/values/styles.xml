@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+    </style>
+    <style name="SplashTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+    <style name="SplashScreenTheme" parent="SplashScreen_Fullscreen">
+
+      <item name="android:windowTranslucentStatus">true</item>
+      <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+      <item name="android:statusBarColor">
+        @android:color/transparent
+      </item>
+
+    </style>
+    <style name="ThemeApp" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon" > @drawable/background_splash</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+    
+    <style name="LightTheme" parent="AppTheme" />
+    <style name="DarkTheme" parent="AppTheme" />
+</resources>

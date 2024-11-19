@@ -1,0 +1,28 @@
+{
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended",
+    "stylelint-config-prettier",
+    "stylelint-config-react-native-styled-components"
+  ],
+  "plugins": ["stylelint-react-native"],
+  "rules": {
+    "unit-allowed-list": ["px", "%"],
+    "declaration-colon-newline-after": null,
+    "no-invalid-double-slash-comments": true,
+    "comment-empty-line-before": null,
+    "block-no-empty": [null, {"ignore": ["comments"]}],
+    "max-empty-lines": 2,
+    "alpha-value-notation": "number",
+    "color-no-invalid-hex": true,
+    "color-hex-case": [
+      "lower",
+      {
+        "message": "Lowercase letters are easier to distinguish from numbers"
+      }
+    ],
+    "color-function-notation": "legacy",
+    "value-keyword-case": ["lower", {"ignoreKeywords": ["dummyValue"]}]
+  }
+}

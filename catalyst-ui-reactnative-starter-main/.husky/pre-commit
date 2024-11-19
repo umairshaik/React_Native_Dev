@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+yarn lint
+yarn lint:style
+yarn prettier:check
+yarn type-check 
+yarn test
+.git/hooks/bin/talisman ${DEBUG_OPTS} --githook pre-commit

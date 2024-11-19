@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`View Spinner render spinner component 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+      },
+    ]
+  }
+  testID="global-suspense-loader"
+>
+  <ActivityIndicator
+    color="black"
+    size="large"
+  />
+</View>
+`;
